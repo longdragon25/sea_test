@@ -9,22 +9,25 @@ class ContactsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppbarCustom(),
-      body: Column(
-        children: [
-          HeaderCustom(
-            nameScreen: 'Contacts',
-            isback: false,
-          ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: Contact.contacts.length,
-              itemBuilder: (context, index) {
-                return CardContact(contact: Contact.contacts[index]);
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            HeaderCustom(
+              nameScreen: 'Contacts',
+              isback: false,
             ),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: Contact.contacts.length,
+                itemBuilder: (context, index) {
+                  return CardContact(contact: Contact.contacts[index]);
+                },
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBarCustom(
           tab1: TabItem(icon: 'assets/help.png', name: 'Help'),

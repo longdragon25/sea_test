@@ -9,7 +9,7 @@ class HeaderCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,11 +20,14 @@ class HeaderCustom extends StatelessWidget {
                 decoration: TextDecoration.underline),
           ),
           isback!
-              ? Text(
-                  '< CANCEL',
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black.withOpacity(0.7)),
+              ? GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Text(
+                    '< CANCEL',
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.black.withOpacity(0.7)),
+                  ),
                 )
               : const SizedBox()
         ],

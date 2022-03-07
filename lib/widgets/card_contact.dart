@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sea_test/models/contact.dart';
+import 'package:sea_test/screens/screens.dart';
 import 'package:sea_test/widgets/widgets.dart';
 
 class CardContact extends StatefulWidget {
@@ -15,97 +16,109 @@ class _CardContactState extends State<CardContact> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
+      padding: const EdgeInsets.symmetric(vertical: 7.5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Container(
-            height: 65,
-            decoration: BoxDecoration(
-                color: isShowOption
-                    ? Color.fromRGBO(242, 249, 205, 1)
-                    : Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 0.5,
-                      blurRadius: 1,
-                      offset: Offset(1.0, 1.0))
-                ],
-                borderRadius: BorderRadius.circular(5)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 9,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(widget.contact.avatarImage),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => ContactDetailScreen(
+                            contact: widget.contact,
+                          )));
+            },
+            child: Container(
+              height: 65,
+              decoration: BoxDecoration(
+                  color: isShowOption
+                      ? Color.fromRGBO(242, 249, 205, 1)
+                      : Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 0.5,
+                        blurRadius: 1,
+                        offset: Offset(1.0, 1.0))
+                  ],
+                  borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 9,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(widget.contact.avatarImage),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '${widget.contact.name}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4!
-                                  .copyWith(
-                                      color: Colors.black.withOpacity(0.7)),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '${widget.contact.phoneNumber}  |',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
-                                          color: Colors.black.withOpacity(0.7),
-                                          fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  '  ${widget.contact.email}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5!
-                                      .copyWith(
-                                          color: Colors.black.withOpacity(0.7),
-                                          fontWeight: FontWeight.w400,
-                                          overflow: TextOverflow.ellipsis),
-                                ),
-                              ],
-                            )
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '${widget.contact.name}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
+                                    .copyWith(
+                                        color: Colors.black.withOpacity(0.7)),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '${widget.contact.phoneNumber}  |',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5!
+                                        .copyWith(
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                            fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    '  ${widget.contact.email}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5!
+                                        .copyWith(
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                            fontWeight: FontWeight.w400,
+                                            overflow: TextOverflow.ellipsis),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isShowOption = !isShowOption;
-                        });
-                      },
-                      icon: Image.asset(
-                        'assets/option.png',
-                        color: isShowOption
-                            ? Color.fromRGBO(184, 161, 91, 1)
-                            : Colors.grey.withOpacity(0.5),
-                      )),
-                )
-              ],
+                  Expanded(
+                    flex: 1,
+                    child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isShowOption = !isShowOption;
+                          });
+                        },
+                        icon: Image.asset(
+                          'assets/option.png',
+                          color: isShowOption
+                              ? Color.fromRGBO(184, 161, 91, 1)
+                              : Colors.grey.withOpacity(0.5),
+                        )),
+                  )
+                ],
+              ),
             ),
           ),
           isShowOption
