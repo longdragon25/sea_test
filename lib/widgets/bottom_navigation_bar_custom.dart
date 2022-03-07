@@ -30,8 +30,8 @@ class BottomNavigationBarCustom extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TabCard(
                     item: tab1,
@@ -40,7 +40,7 @@ class BottomNavigationBarCustom extends StatelessWidget {
                     item: tab2,
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 20,
                   ),
                   TabCard(
                     item: tab3,
@@ -85,33 +85,78 @@ class BottomNavigationBarCustom extends StatelessWidget {
 }
 
 class TabCard extends StatelessWidget {
+  final int annouceCount = 15;
   final TabItem item;
   const TabCard({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: Column(
-        children: [
-          Image.asset(
-            item.icon,
-            color: Colors.black.withOpacity(0.7),
-            width: 30,
-            height: 40,
-          ),
-          item.name != null
-              ? Text(
-                  '${item.name}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(color: Colors.black.withOpacity(0.7)),
-                )
-              : const SizedBox()
-        ],
-      ),
-    );
+    return item.name == 'Projects'
+        ? Container(
+            padding: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(right: 35),
+            child: Column(
+              children: [
+                Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    Image.asset(
+                      item.icon,
+                      color: Colors.black.withOpacity(0.7),
+                      width: 30,
+                      height: 30,
+                    ),
+                    Positioned(
+                        top: -5,
+                        right: -8,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromRGBO(133, 37, 43, 1),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(2),
+                            child: Text(
+                              '$annouceCount',
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.white),
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+                item.name != null
+                    ? Text(
+                        '${item.name}',
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                            color: Colors.black.withOpacity(0.7),
+                            fontWeight: FontWeight.w600),
+                      )
+                    : const SizedBox()
+              ],
+            ),
+          )
+        : Container(
+            padding: const EdgeInsets.only(top: 10),
+            child: Column(
+              children: [
+                Image.asset(
+                  item.icon,
+                  color: Colors.black.withOpacity(0.7),
+                  width: 30,
+                  height: 30,
+                ),
+                item.name != null
+                    ? Text(
+                        '${item.name}',
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                            color: Colors.black.withOpacity(0.7),
+                            fontWeight: FontWeight.w600),
+                      )
+                    : const SizedBox()
+              ],
+            ),
+          );
   }
 }
 
